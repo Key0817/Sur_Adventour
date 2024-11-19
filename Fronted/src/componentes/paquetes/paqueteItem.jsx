@@ -9,11 +9,11 @@ const PaqueteItem = ({ paquete }) => {
                 <h2>{paquete.nombre}</h2>
                 <p>{paquete.descripcion}</p>
                 <div className="paquete-meta">
+                    <span>Duración: {paquete.fecha_inicio} - {paquete.fecha_fin}</span>
                     <span>Precio: ${paquete.precio}</span>
-                    <span>Fecha: {paquete.fecha_inicio} - {paquete.fecha_fin}</span>
                 </div>
-                <button className="btn-editar">Editar</button>
             </div>
+            <button className="btn-editar">Editar</button>
         </div>
     );
 };
