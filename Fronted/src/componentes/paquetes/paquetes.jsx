@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { buscarPaquetes } from '../../services/paquetes';
 import PaqueteItem from './paqueteItem';
+import BusquedaPaquetes from './busquedaPaquetes';
 import './paquetes.css';
 
 const Paquetes = () => {
@@ -25,11 +26,19 @@ const Paquetes = () => {
         fetchPaquetes();
     }, [filtro]);
 
-    // Navegación al formulario de registro
     const navigate = useNavigate();
 
     const handleNavigateToRegistro = () => {
         navigate('/formularioPaquetes');
+    };
+
+    const handleBuscarAvanzado = async (filtros) => {
+        try {
+            const data = await buscarPaquetes(filtros);
+            setPaquetes(data);
+        } catch (error) {
+            console.error('Error al aplicar filtros:', error.message);
+        }
     };
 
     return (
@@ -49,13 +58,15 @@ const Paquetes = () => {
             <h1>Administración de los paquetes turísticos</h1>
 
             <div className="acciones">
-                <input
-                    type="text"
-                    placeholder="Busca un paquete..."
-                    value={filtro}
-                    onChange={(e) => setFiltro(e.target.value)}
-                />
-
+                <div className="busqueda">
+                    <input
+                        type="text"
+                        placeholder="Busca un paquete..."
+                        value={filtro}
+                        onChange={(e) => setFiltro(e.target.value)}
+                    />
+                    <BusquedaPaquetes onBuscar={handleBuscarAvanzado} />
+                </div>
                 <button className="btn-registrar" onClick={handleNavigateToRegistro}>
                     Registrar Nuevo Paquete
                 </button>

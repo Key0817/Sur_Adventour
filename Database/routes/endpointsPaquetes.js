@@ -127,6 +127,8 @@ router.get('/search', async (req, res) => {
         if (precio_max) query += ` AND p.precio <= @precio_max`;
 
         const request = pool.request();
+
+        // Agregar los parámetros al request
         if (codigo) request.input('codigo', sql.NVarChar, codigo);
         if (nombre) request.input('nombre', sql.NVarChar, `%${nombre}%`);
         if (lugar) request.input('lugar', sql.NVarChar, `%${lugar}%`);
@@ -135,11 +137,10 @@ router.get('/search', async (req, res) => {
         if (precio_min) request.input('precio_min', sql.Decimal(10, 2), precio_min);
         if (precio_max) request.input('precio_max', sql.Decimal(10, 2), precio_max);
 
-        // Ejecutar la consulta
         const result = await request.query(query);
 
-        // Procesar los datos para agrupar servicios por paquete
         const paquetesMap = new Map();
+
         result.recordset.forEach((row) => {
             const {
                 paquete_id,
@@ -154,6 +155,7 @@ router.get('/search', async (req, res) => {
                 servicio,
             } = row;
 
+            // Si el paquete aún no está en el Map, agregarlo
             if (!paquetesMap.has(paquete_id)) {
                 paquetesMap.set(paquete_id, {
                     id: paquete_id,
@@ -171,6 +173,7 @@ router.get('/search', async (req, res) => {
                 });
             }
 
+            // Agregar el servicio si existe
             if (servicio) {
                 paquetesMap.get(paquete_id).servicios.push(servicio);
             }

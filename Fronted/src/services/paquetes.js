@@ -65,12 +65,3 @@ export const buscarPaquetePorId = async (id) => {
     }
 };
 
-//Filtrado de paquetes mas especificado
-const buscarPaquetes = async (filtros) => {
-    try {
-        const response = await axios.get('http://localhost:5000/api/paquetes/search', { params: filtros });
-        setPaquetes(response.data);
-    } catch (error) {
-        console.error('Error al buscar paquetes:', error);
-    }
-};
