@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { crearPaquete } from '../../services/paquetes';
+import { useNavigate } from 'react-router-dom';
 import './paquetes.css';
 
 const RegistrarPaquete = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         codigo: '',
         nombre: '',
@@ -54,6 +56,8 @@ const RegistrarPaquete = () => {
             console.error('Error al registrar el paquete:', error);
             setMensaje('Ocurrió un error al registrar el paquete.');
         }
+
+        navigate('/');
     };
 
     return (

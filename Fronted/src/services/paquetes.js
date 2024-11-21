@@ -15,7 +15,6 @@ export const buscarPaquetes = async (filtros) => {
     }
 };
 
-
 // Crear un paquete
 export const crearPaquete = async (paquete) => {
     const formData = new FormData();
@@ -40,8 +39,12 @@ export const crearPaquete = async (paquete) => {
 };
 
 // Actualizar un paquete
-export const actualizarPaquete = async (id, paquete) => {
-    const response = await API.put(`/${id}`, paquete); 
+export const actualizarPaquete = async (id, paqueteData) => {
+    const response = await API.put(`/${id}`, paqueteData, {
+        headers: {
+            'Content-Type': 'multipart/form-data', 
+        },
+    });
     return response.data;
 };
 
@@ -49,4 +52,25 @@ export const actualizarPaquete = async (id, paquete) => {
 export const eliminarPaquete = async (id) => {
     const response = await API.delete(`/${id}`); 
     return response.data;
+};
+
+// Obtener un paquete por ID
+export const buscarPaquetePorId = async (id) => {
+    try {
+        const response = await API.get(`/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener el paquete por ID:', error);
+        throw error;
+    }
+};
+
+//Filtrado de paquetes mas especificado
+const buscarPaquetes = async (filtros) => {
+    try {
+        const response = await axios.get('http://localhost:5000/api/paquetes/search', { params: filtros });
+        setPaquetes(response.data);
+    } catch (error) {
+        console.error('Error al buscar paquetes:', error);
+    }
 };

@@ -13,9 +13,13 @@ const Paquetes = () => {
         const fetchPaquetes = async () => {
             try {
                 const data = await buscarPaquetes({ nombre: filtro });
+                if (!data || data.length === 0) {
+                    throw new Error("No se encontraron paquetes");
+                }
                 setPaquetes(data);
             } catch (error) {
-                console.error('Error al cargar los paquetes:', error);
+                console.error('Error al cargar los paquetes:', error.message);
+
             }
         };
         fetchPaquetes();
@@ -66,11 +70,18 @@ const Paquetes = () => {
 
             {/* Footer */}
             <footer className="footer">
-                <p>© 2024 Sur Adventour | Términos y condiciones</p>
                 <div className="social-icons">
-                    <a href="https://www.facebook.com/suradventour">Facebook</a>
-                    <a href="https://www.instagram.com/sur_adventour?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a>
-                    <a href="#">WhatsApp</a>
+                    <h3 className="text-social">Visítanos en nuestras redes</h3>
+                    <div className="redes-sociales">
+                        <a href="https://www.facebook.com/suradventour"><img className="social-icon" src="/assets/Iconos/Social/facebook.png" alt="facebook-logo" /></a>
+                        <a href="https://www.instagram.com/sur_adventour?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                            <img className="social-icon" src="/assets/Iconos/Social/instagram.png" alt="Instagram-logo" />
+                        </a>
+                        <a href="/"><img className="social-icon" src="/assets/Iconos/Social/whatsapp.png" alt="Twitter-logo" /></a>
+                    </div>
+                </div>
+                <div className="down-footer">
+                    <p>© 2024 Sur Adventour | Términos y condiciones</p>
                 </div>
             </footer>
         </div>
