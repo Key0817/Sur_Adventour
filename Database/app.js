@@ -11,16 +11,8 @@ const app = express();
 app.use(cors()); 
 app.use(express.json()); 
 
-//servir estaticamente la carpeta donde estara el fronted
-app.use(express.static(path.join(__dirname, '../Fronted')))
-
 // Registrar los endpoints
 app.use('/api/paquetes', endPoints);
-
-// Ruta base para renderizar
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../Fronted', 'index.html'));
-// });
 
 app.get('/', (req, res) => {
     res.send('Bienvenido al servidor de Sur Adventour...');
