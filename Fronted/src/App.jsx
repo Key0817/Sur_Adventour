@@ -1,24 +1,18 @@
-
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Paquetes from './componentes/paquetes/paquetes';
+import FormularioPaquetes from './componentes/paquetes/formularioPaquetes';
 import './styles/App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () => {
+    return (
+        <Routes>
+            <Route path="/" element={<Paquetes />} />
+            <Route path="/formularioPaquetes" element={<FormularioPaquetes />} />
+        </Routes>
+    );
+};
 
 export default App;
+

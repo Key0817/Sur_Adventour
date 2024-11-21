@@ -4,7 +4,11 @@ import './paquetes.css';
 const PaqueteItem = ({ paquete }) => {
     return (
         <div className="paquete-item">
-            <img src={paquete.imagen} alt={paquete.nombre} className="paquete-imagen" />
+            {paquete.imagen ? (
+                <img src={paquete.imagen} alt={paquete.nombre} className="paquete-imagen" />
+            ) : (
+                <div className="imagen-placeholder">Imagen no disponible</div>
+            )}
             <div className="paquete-info">
                 <h2>{paquete.nombre}</h2>
                 <p>{paquete.descripcion}</p>

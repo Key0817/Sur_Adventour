@@ -34,15 +34,15 @@
     border: 1px solid var(--primario)
 }
 
-
-
 .btn-generar-reporte {
     background-color: var(--primario);
     color: var(--blanco);
     border: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    align-self: flex-end;
+    margin-left: auto; 
 }
 
 .acciones {
@@ -51,20 +51,20 @@
     margin: 20px 0;
 }
 
-.acciones input {
-    width: 60%;
-    padding: 10px;
-    border: 1px solid var(--grisOscuro);
-    border-radius: 5px;
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
 }
 
 .btn-registrar {
     background-color: var(--secundario);
     color: var(--blanco);
     border: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 10px; 
 }
 
 .paquetes-lista {
@@ -91,8 +91,8 @@
 }
 
 .paquete-imagen {
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 5px;
     margin-right: 10px;
@@ -114,4 +114,47 @@
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px; 
+    align-self: flex-end; 
+}
+
+/* Estilos a la seccion de registrar un paquete */
+.registrar-paquete {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, textarea, button {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+h2 {
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }

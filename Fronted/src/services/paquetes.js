@@ -2,24 +2,51 @@ import API from './api';
 
 // Obtener paquetes con filtros
 export const buscarPaquetes = async (filtros) => {
-    const response = await API.get('/paquetes/search', { params: filtros });
-    return response.data;
+    try {
+        const response = await API.get('/search', { params: filtros });
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            console.warn('No se encontraron paquetes:', error.response.data.message);
+            return []; // Devuelve una lista vacía al frontend
+        }
+        console.error('Error al buscar paquetes:', error);
+        throw error;
+    }
 };
+
 
 // Crear un paquete
 export const crearPaquete = async (paquete) => {
-    const response = await API.post('/paquetes', paquete);
+    const formData = new FormData();
+
+    // Agregar datos al FormData
+    for (const key in paquete) {
+        if (key === 'imagen' && paquete.imagen) {
+            formData.append(key, paquete.imagen); 
+        } else {
+            formData.append(key, paquete[key]);
+        }
+    }
+
+    // Realizar la petición POST
+    const response = await API.post('/', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data', 
+        },
+    });
+
     return response.data;
 };
 
 // Actualizar un paquete
 export const actualizarPaquete = async (id, paquete) => {
-    const response = await API.put(`/paquetes/${id}`, paquete);
+    const response = await API.put(`/${id}`, paquete); 
     return response.data;
 };
 
 // Eliminar un paquete
 export const eliminarPaquete = async (id) => {
-    const response = await API.delete(`/paquetes/${id}`);
+    const response = await API.delete(`/${id}`); 
     return response.data;
 };

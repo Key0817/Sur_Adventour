@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { buscarPaquetes } from '../../services/paquetes';
 import PaqueteItem from './paqueteItem';
-import './paquetes.css'; 
+import './paquetes.css';
 
 const Paquetes = () => {
     const [paquetes, setPaquetes] = useState([]);
@@ -20,18 +21,25 @@ const Paquetes = () => {
         fetchPaquetes();
     }, [filtro]);
 
+    // Navegación al formulario de registro
+    const navigate = useNavigate();
+
+    const handleNavigateToRegistro = () => {
+        navigate('/formularioPaquetes');
+    };
+
     return (
         <div className="paquetes-container">
             {/* Encabezado */}
             <header className="header">
                 <div className="logo">
-                    <img src="../../../public/assets/IMG/Logo.png" alt="Sur Adventour" />
+                    <img src="/assets/IMG/Logo.png" alt="Sur Adventour" />
                 </div>
-                <nav >
+                <nav>
                     <a href="/">Inicio</a>
-                    <a href="/paquetes">Paquetes</a>
+                    <a id="paquetes" href="/paquetes">Paquetes</a>
                 </nav>
-                <button className="btn-generar-reporte">Generar Reporte</button>
+                <button className="btn-generar-reporte" onClick={handleNavigateToRegistro}>Generar Reporte</button>
             </header>
 
             <h1>Administración de los paquetes turísticos</h1>
@@ -43,7 +51,10 @@ const Paquetes = () => {
                     value={filtro}
                     onChange={(e) => setFiltro(e.target.value)}
                 />
-                <button className="btn-registrar">Registrar Nuevo Paquete</button>
+
+                <button className="btn-registrar" onClick={handleNavigateToRegistro}>
+                    Registrar Nuevo Paquete
+                </button>
             </div>
 
             {/* Lista de paquetes */}
