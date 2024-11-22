@@ -8,7 +8,7 @@ export const buscarPaquetes = async (filtros) => {
     } catch (error) {
         if (error.response && error.response.status === 404) {
             console.warn('No se encontraron paquetes:', error.response.data.message);
-            return []; // Devuelve una lista vacía al frontend
+            return [];
         }
         console.error('Error al buscar paquetes:', error);
         throw error;

@@ -30,7 +30,11 @@ const RegistrarPaquete = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
+        if (new Date(formData.fecha_fin) < new Date(formData.fecha_inicio)) {
+            setMensaje('La fecha de fin no puede ser menor que la fecha de inicio.');
+            return;
+        }
         // Convertir los servicios en un array si es necesario
         const paqueteData = {
             ...formData,

@@ -13,16 +13,16 @@ const PaqueteItem = ({ paquete }) => {
         setMenuVisible(!menuVisible);
     };
     const handleClickOutside = (event) => {
-        
+
         if (menuRef.current && !menuRef.current.contains(event.target)) {
             setMenuVisible(false);
         }
     };
     useEffect(() => {
-        
+
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            
+
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
@@ -49,13 +49,14 @@ const PaqueteItem = ({ paquete }) => {
     // Funcion para formatear la menra en la que se muestra la fecha
     const formatFecha = (fecha) => {
         const date = new Date(fecha);
-        return date.toLocaleDateString('es-ES');
+        const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+        return adjustedDate.toLocaleDateString('es-CR');
     };
 
     return (
         <div className="paquete-item">
             {paquete.imagen ? (
-               <img src={paquete.imagen || '/assets/placeholder.png'} alt={paquete.nombre} className="paquete-imagen" />
+                <img src={paquete.imagen || '/assets/placeholder.png'} alt={paquete.nombre} className="paquete-imagen" />
 
             ) : (
                 <div className="imagen-placeholder">Imagen no disponible</div>

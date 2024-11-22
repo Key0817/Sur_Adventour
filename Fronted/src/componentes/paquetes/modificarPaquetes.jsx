@@ -52,6 +52,11 @@ const ModificarPaquete = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (new Date(formData.fecha_fin) < new Date(formData.fecha_inicio)) {
+            setMensaje('La fecha de fin no puede ser menor que la fecha de inicio.');
+            return;
+        }
     
         const paqueteData = {
             ...formData,
@@ -165,7 +170,7 @@ const ModificarPaquete = () => {
                     <label>Imagen:</label>
                     <input type="file" onChange={handleFileChange} />
                 </div>
-                <button type="submit">Actualizar Paquete</button>
+                <button type="submit">Modificar Paquete</button>
             </form>
             {mensaje && <p>{mensaje}</p>}
         </div>
